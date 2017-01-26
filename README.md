@@ -133,3 +133,11 @@ Your code files will be monitored and any change will trigger a rebuild. Browser
 You can remove the generated files by running:
 
     gulp clean
+
+## Contributors
+
+* [André Rieussec](https://github.com/ventajou)
+
+## License
+
+MIT (c) RightScale
