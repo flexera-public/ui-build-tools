@@ -67,6 +67,7 @@ Here's the schema of the options, in TypeScript style:
         bundle: string; // name of the bundle to run
         port: number;   // default: 3000
         host: string;   // default: localhost
+        https: boolean; // default: undefined
         environments: { // defines environments to proxy API calls to
           [name: string]: { // environment name
             [path: string]: string  // relative path to url proxy definitions 
