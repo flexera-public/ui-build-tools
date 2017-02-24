@@ -3,6 +3,7 @@ const gulp = require('gulp');
 
 const run = require('./lib/run');
 const bundleTasks = require('./lib/bundle');
+const watch = require('./lib/watch');
 
 function init(config) {
 
@@ -32,6 +33,7 @@ function init(config) {
 
       if (_.intersection(bundle.dependencies, generated).length === (bundle.dependencies || []).length) {
         bundleTasks.generate(bundle, minify);
+        watch.generate(bundle, config);
         todo.splice(i, 1);
         generated.push(bundle.name);
       }
