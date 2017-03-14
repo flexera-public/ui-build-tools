@@ -72,6 +72,9 @@ Here's the schema of the options, in TypeScript style:
           [name: string]: { // environment name
             [path: string]: string  // relative path to url proxy definitions 
           }
+        };
+        customHeaders: { // optional headers to pass to the endpoints
+          [name: string]: string
         }
       }
     }
