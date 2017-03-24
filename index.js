@@ -50,7 +50,7 @@ function init(config) {
 
   gulp.task('clean', config.beforeClean || [], cb => {
     var del = require('del');
-    del(['build/**/*', '.tmp/**/*', 'dist/**/*', '**/index.build.scss'], cb);
+    return del(['build/**/*', '.tmp/**/*', 'dist/**/*', '**/index.build.scss']);
   });
 }
 
