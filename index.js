@@ -48,7 +48,7 @@ function init(config) {
     run.generate(config);
   }
 
-  gulp.task('clean', cb => {
+  gulp.task('clean', config.beforeClean || [], cb => {
     var del = require('del');
     del(['build/**/*', '.tmp/**/*', 'dist/**/*', '**/index.build.scss'], cb);
   });

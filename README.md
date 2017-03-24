@@ -55,6 +55,7 @@ Here's the schema of the options, in TypeScript style:
 
     {
       minify: boolean; // default: true, whether to minify JavaScript code
+      beforeClean: string[]; // tasks that should be run before the clean task
       bundles: {
         name: string;
         dependencies: string[]; // names of other bundles
@@ -63,6 +64,7 @@ Here's the schema of the options, in TypeScript style:
         angular: boolean;       // default: true, determines if HTML and SVG files should be bundle in Angular pre-cached files
         library: boolean;       // set to true if your bundle is a library
         minify: boolean;        // override global minification setting at the bundle level
+        beforeBuild: string[];  // tasks that should be run before the bundle is built
       }[],
       run: {  // configure to run a bundle as a web app
         bundle: string; // name of the bundle to run
