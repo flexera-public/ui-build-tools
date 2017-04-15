@@ -54,32 +54,32 @@ Create `gulpfile.js` at the root of your project to configure the build tools. A
 Here's the schema of the options, in TypeScript style:
 
     {
-      minify: boolean; // default: true, whether to minify JavaScript code
-      beforeClean: string[]; // tasks that should be run before the clean task
+      minify: boolean;          // default: true, whether to minify JavaScript code
+      beforeClean: string[];    // tasks that should be run before the clean task
       bundles: {
         name: string;
         dependencies: string[]; // names of other bundles
         root: string;           // folder name containing the bundle
-        dist: boolean;          // whether to output the results to the dist folder instead of the build folder
         angular: boolean;       // default: true, determines if HTML and SVG files should be bundle in Angular pre-cached files
         library: boolean;       // set to true if your bundle is a library
         minify: boolean;        // override global minification setting at the bundle level
         beforeBuild: string[];  // tasks that should be run before the bundle is built
-      }[],
-      run: {  // configure to run a bundle as a web app
-        bundle: string; // name of the bundle to run
-        port: number;   // default: 3000
-        host: string;   // default: localhost
-        https: boolean; // default: undefined
-        environments: { // defines environments to proxy API calls to
-          [name: string]: { // environment name
-            [path: string]: string  // relative path to url proxy definitions 
+        assetFolders: string[]; // name of folders to be copied directly
+        run: {                  // configure the bundle to run as a web app
+          port: number;         // default: 3000
+          host: string;         // default: localhost
+          https: boolean;       // default: undefined
+          routes: {[route:string]: string}; // maps a route to a local folder
+          environments: {       // defines environments to proxy API calls to
+            [name: string]: {   // environment name
+              [path: string]: string  // relative path to url proxy definitions 
+            }
+          };
+          customHeaders: {      // optional headers to pass to the endpoints
+            [name: string]: string
           }
-        };
-        customHeaders: { // optional headers to pass to the endpoints
-          [name: string]: string
         }
-      }
+      }[],
     }
 
 ## The generated tasks
@@ -100,7 +100,7 @@ Building an app involves the following:
 - Pre-caching SVG images into a JavaScript file (to be imported by the TypeScript code).
 - copying non `.ts` and non `.scss` files from the root of the bundle. 
 
-All generated files are placed in the `build` folder. If the `dist` flag is set on your bundle, then the files are instead placed into the `dist` folder except for the templates and images pre-cache files.
+All generated files are placed in a subfolder of the `dist` folder named after the bundle.
 
 You can build your bundle using:
 
@@ -129,9 +129,9 @@ You can also debug your specs in the browser, for example:
 
 You may want to run your app using a local server. This is made possible using BrowserSync. By default, your bundle's name is used as task name to run it:
 
-    gulp app
+    gulp app:run
 
-But if you specify environments in your configuration, then the environments names will be used instead.
+But if you specify environments in your configuration, then the environments names will be used instead insteads of `run`.
 
 Your code files will be monitored and any change will trigger a rebuild. BrowserSync will auto reload the page on changes.
 
