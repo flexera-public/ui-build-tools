@@ -82,6 +82,16 @@ Here's the schema of the options, in TypeScript style:
       }[],
     }
 
+## Running tasks after build
+
+If you need to run some post-build tasks, you need to override the `build` task for your bundle. For example:
+
+    gulp.task('app:build', ['app:build-tasks'], () => {
+      // do things here...
+    });
+
+Make sure to make it depend on the `build-tasks` task for the bundle otherwise your build won't do much.
+
 ## The generated tasks
 
 The tasks generated depend on the configuration and the files found in the bundle. For example, without `spec.ts` no test tasks will be created.
